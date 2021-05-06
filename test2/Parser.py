@@ -3,7 +3,7 @@ import json
 import requests
 from bs4 import BeautifulSoup as BSoup
 from pymongo import MongoClient as Mongo
-import pprint
+from test2 import creds
 
 
 
@@ -86,9 +86,10 @@ def parseForUrl(url, document):
 
     schoolsStats.update_one({"team": document["name"]}, {"$set":teamStatForInsert}, upsert=True)
 
-
-client = Mongo()
-client
+client = Mongo(f'mongodb+srv://{creds.username}:{creds.password}@cluster0.vgnup.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
+db = client.test
+# client = Mongo()
+# client
 
 db = client["myLinkStorage"]
 schools = db.myLinkStorageSchools
